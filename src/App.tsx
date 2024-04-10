@@ -7,9 +7,9 @@ import Basket from "./Basket.tsx";
 import {BasketItemData, ProductData} from "./Types.ts";
 
 function App() {
-    const [basketContent, setBasketContent] = useState<BasketItemData[]>([])
+    const [basketContent,] = useState<BasketItemData[]>([])
 
-    const addToBasket = (product: ProductData) => {
+    const addToBasket = (_product: ProductData) => {
         //setBasketContent([...basketContent, product])
     }
     return (

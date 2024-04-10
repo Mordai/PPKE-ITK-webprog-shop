@@ -1,4 +1,5 @@
 import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {ProductData} from "./Types.ts";
 
 type ProductCardProps = {
@@ -8,9 +9,9 @@ type ProductCardProps = {
 
 export default function ProductCard(props: ProductCardProps){
     return (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 275, mb: 2 }}>
             <CardContent>
-                <Typography variant='h1' sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography variant="h5" color="text.secondary" gutterBottom>
                     {props.product.name}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -21,7 +22,7 @@ export default function ProductCard(props: ProductCardProps){
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Kosárba vele!</Button>
+                <Button startIcon={<ShoppingCartIcon/>} size="small">Kosárba vele!</Button>
             </CardActions>
         </Card>
     )
