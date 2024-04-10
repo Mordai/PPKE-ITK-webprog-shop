@@ -5,6 +5,7 @@ import {
   BadgeProps,
   Box,
   IconButton,
+  Stack,
   Toolbar,
   Typography,
   styled,
@@ -28,14 +29,19 @@ export default function MainLayout(props: { cartCount: number }) {
       <Box component={"div"} sx={{ flexGrow: 1, mb: 1 }}>
         <AppBar position="static" sx={{ pt: 1, pb: 1 }}>
           <Toolbar>
-            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h4"
+              component="div"
+              sx={{ flexGrow: 1 }}
+              onClick={() => navigate("/")}
+            >
               Webshop
             </Typography>
             <IconButton
               aria-label="cart"
               color="inherit"
               onClick={() => {
-                navigate("/basket");
+                navigate("basket");
               }}
             >
               <StyledBadge badgeContent={props.cartCount} color="primary">
@@ -45,7 +51,9 @@ export default function MainLayout(props: { cartCount: number }) {
           </Toolbar>
         </AppBar>
       </Box>
-      <Outlet />
+      <Stack sx={{ pl: 1, pr: 1, mt: 1 }}>
+        <Outlet />
+      </Stack>
     </>
   );
 }

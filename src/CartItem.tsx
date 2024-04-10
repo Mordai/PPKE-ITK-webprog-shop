@@ -1,3 +1,4 @@
+import { Button, Stack, Typography } from "@mui/material";
 import { BasketItemData } from "./Types";
 
 type CartItemProps = {
@@ -6,33 +7,17 @@ type CartItemProps = {
 };
 
 export default function CartItem(props: CartItemProps) {
-  console.log(props.basketItem);
   return (
-    // <div>
-    //   <p>{props.basketItem.product.name}</p>
-    //   <p>{props.basketItem.product.price}</p>
-    //   <p>{props.basketItem.quantity}</p>
-    //   <button
-    //     onClick={() =>
-    //       props.changeQuantity(
-    //         props.basketItem.product.id,
-    //         props.basketItem.quantity - 1
-    //       )
-    //     }
-    //   >
-    //     -
-    //   </button>
-    //   <button
-    //     onClick={() =>
-    //       props.changeQuantity(
-    //         props.basketItem.product.id,
-    //         props.basketItem.quantity + 1
-    //       )
-    //     }
-    //   >
-    //     +
-    //   </button>
-    // </div>
-    <>:)</>
+    <Stack
+      key={props.basketItem.product.id}
+      display={"flex"}
+      direction={"column"}
+    >
+      <Typography>{props.basketItem.product.name}</Typography>
+      <Typography>{props.basketItem.product.price}</Typography>
+      <Typography>{props.basketItem.quantity}</Typography>
+      <Button>-</Button>
+      <Button>+</Button>
+    </Stack>
   );
 }

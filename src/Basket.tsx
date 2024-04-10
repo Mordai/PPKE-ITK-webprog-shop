@@ -1,6 +1,6 @@
 import { BasketItemData } from "./Types.ts";
-import CartItem from "./CartItem.tsx";
 import { Typography } from "@mui/material";
+import CartItem from "./CartItem.tsx";
 
 type BasketProps = {
   basketData: BasketItemData[];
@@ -8,17 +8,15 @@ type BasketProps = {
 };
 
 export default function Basket(props: BasketProps) {
-  console.log(props.basketData);
   return (
     <>
-      <Typography variant="h4">Kosár</Typography>
-      {props.basketData.map((item) => {
-        <CartItem
-          key={item.product.id}
-          basketItem={item}
-          changeQuantity={props.changeQuantity}
-        />;
-      })}
+      {props.basketData.length > 0 ? (
+        props.basketData.map((item) => {
+          <CartItem basketItem={item} changeQuantity={props.changeQuantity} />;
+        })
+      ) : (
+        <Typography>A kosár üres</Typography>
+      )}
     </>
   );
 }
