@@ -41,7 +41,7 @@ export default function MainLayout(props: { cartCount: number }) {
               aria-label="cart"
               color="inherit"
               onClick={() => {
-                navigate("basket");
+                navigate("/basket");
               }}
             >
               <StyledBadge badgeContent={props.cartCount} color="primary">
