@@ -1,28 +1,65 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import MainLayout from "./MainLayout";
 import TOS from "./TOS.tsx";
-import {useState} from "react";
+import { useState } from "react";
 import Basket from "./Basket.tsx";
-import {BasketItemData, ProductData} from "./Types.ts";
+import { BasketItemData, ProductData } from "./Types.ts";
 
-function App() {
-    const [basketContent,] = useState<BasketItemData[]>([])
+export default function App() {
+  const [basketContent, setBasketContent] = useState<BasketItemData[]>([]);
 
-    const addToBasket = (_product: ProductData) => {
-        //setBasketContent([...basketContent, product])
+  const addToBasket = (_product: ProductData) => {
+    const product = basketContent.find(
+      (item) => item.product.id === _product.id
+    );
+    if (!product) {
+      setBasketContent([...basketContent, { product: _product, quantity: 1 }]);
+    } else {
+      setBasketContent(
+        basketContent.map((item) => {
+          if (item.product.id === _product.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          }
+          return item;
+        })
+      );
     }
-    return (
-      <BrowserRouter>
-          <Routes>
-              <Route path={"/"}  element={<MainLayout/>}>
-                  <Route index element={<Home addToBasket={addToBasket}/>}/>
-                  <Route path={'basket'} element={<Basket basketData={basketContent}/>}/>
-                  <Route path={'tos'} element={<TOS/>}/>
-              </Route>
-          </Routes>
-      </BrowserRouter>
-  )
-}
+  };
 
-export default App
+  const changeQuantity = (id: string, quantity: number) => {
+    setBasketContent(
+      basketContent.map((item) => {
+        if (item.product.id === id) {
+          return { ...item, quantity: quantity };
+        }
+        return item;
+      })
+    );
+  };
+
+  const totalQuantity = basketContent.reduce(
+    (item, acc) => item + acc.quantity,
+    0
+  );
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<MainLayout cartCount={totalQuantity} />}>
+          <Route index element={<Home addToBasket={addToBasket} />} />
+          <Route
+            path={"basket"}
+            element={
+              <Basket
+                basketData={basketContent}
+                changeQuantity={changeQuantity}
+              />
+            }
+          />
+          <Route path={"tos"} element={<TOS />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}

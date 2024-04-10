@@ -1,28 +1,51 @@
-import {Outlet} from "react-router-dom";
-import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
+import { Outlet } from "react-router-dom";
+import {
+  AppBar,
+  Badge,
+  BadgeProps,
+  Box,
+  IconButton,
+  Toolbar,
+  Typography,
+  styled,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export default function MainLayout() {
-    return(
-        <>
-        <Box component={'div'} sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Webshop
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-            </AppBar>
-        </Box>
-        <Outlet/>
-        </>
-    )
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
+
+export default function MainLayout(props: { cartCount: number }) {
+  const navigate = useNavigate();
+  return (
+    <>
+      <Box component={"div"} sx={{ flexGrow: 1, mb: 1 }}>
+        <AppBar position="static" sx={{ pt: 1, pb: 1 }}>
+          <Toolbar>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+              Webshop
+            </Typography>
+            <IconButton
+              aria-label="cart"
+              color="inherit"
+              onClick={() => {
+                navigate("/basket");
+              }}
+            >
+              <StyledBadge badgeContent={props.cartCount} color="primary">
+                <ShoppingCartIcon />
+              </StyledBadge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Outlet />
+    </>
+  );
 }
