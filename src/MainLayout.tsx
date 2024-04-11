@@ -51,7 +51,7 @@ export default function MainLayout(props: { cartCount: number }) {
           </Toolbar>
         </AppBar>
       </Box>
-      <Stack sx={{ pl: 1, pr: 1, mt: 1 }}>
+      <Stack sx={{ pl: 1, pr: 1, mt: 2 }}>
         <Outlet />
       </Stack>
     </>

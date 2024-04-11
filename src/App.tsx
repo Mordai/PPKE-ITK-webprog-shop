@@ -29,12 +29,14 @@ export default function App() {
 
   const changeQuantity = (id: string, quantity: number) => {
     setBasketContent(
-      basketContent.map((item) => {
-        if (item.product.id === id) {
-          return { ...item, quantity: quantity };
-        }
-        return item;
-      })
+      quantity === 0
+        ? basketContent.filter((item) => item.product.id !== id)
+        : basketContent.map((item) => {
+            if (item.product.id === id) {
+              return { ...item, quantity: quantity };
+            }
+            return item;
+          })
     );
   };
 

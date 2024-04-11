@@ -30,6 +30,7 @@ export default function ProductCard(props: ProductCardProps) {
           startIcon={<ShoppingCartIcon />}
           size="small"
           onClick={() => props.addToBasket(props.product)}
+          disabled={props.product.stock === 0}
         >
           Kosárba vele!
         </Button>
