@@ -1,4 +1,4 @@
-import { BasketItemData, OrderStatus } from "./Types.ts";
+import { BasketItemData, OrderStatus, apiURL } from "./Types.ts";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import CartItem from "./CartItem.tsx";
 import { useEffect, useState } from "react";
@@ -10,8 +10,6 @@ type BasketProps = {
   changeQuantity: (id: string, quantity: number) => void;
   clearBasket: () => void;
 };
-
-const postURL = "https://beta.dev.itk.ppke.hu/webprog/example/api/createOrder";
 
 export default function Basket(props: BasketProps) {
   const totalCost = props.basketData.reduce(
@@ -27,7 +25,7 @@ export default function Basket(props: BasketProps) {
 
   const placeOrder = () => {
     axios
-      .post(postURL, {
+      .post(apiURL + `createOrder`, {
         basket: props.basketData.map((item) => ({
           id: item.product.id,
           q: item.quantity,
