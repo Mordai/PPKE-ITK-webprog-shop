@@ -19,4 +19,4 @@ export type OrderStatus = {
   error?: string;
 };
 
-export const apiURL = "http://beta.dev.itk.ppke.hu/webprog/example/api/";
+export const apiURL = "https://beta.dev.itk.ppke.hu/webprog/example/api/";

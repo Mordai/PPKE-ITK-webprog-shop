@@ -25,7 +25,7 @@ export default function Basket(props: BasketProps) {
 
   const placeOrder = () => {
     axios
-      .post(apiURL + `createOrder`, {
+      .post(apiURL + "createOrder", {
         basket: props.basketData.map((item) => ({
           id: item.product.id,
           q: item.quantity,
@@ -47,6 +47,13 @@ export default function Basket(props: BasketProps) {
             error: data.data.error,
           });
         }
+      })
+      .catch((error) => {
+        setOrderStatus({
+          status: "Error",
+          orderId: "",
+          error: error.message,
+        });
       });
   };
   useEffect(() => {
