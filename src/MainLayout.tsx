@@ -26,13 +26,31 @@ export default function MainLayout(props: { cartCount: number }) {
   const navigate = useNavigate();
   return (
     <>
-      <Box component={"div"} sx={{ flexGrow: 1, mb: 1 }}>
-        <AppBar position="static" sx={{ pt: 1, pb: 1 }}>
-          <Toolbar>
+      <Box
+        component={"div"}
+        sx={{
+          flexGrow: 1,
+          mb: 15,
+        }}
+      >
+        <AppBar
+          sx={{
+            pt: 1,
+            pb: 1,
+          }}
+        >
+          <Toolbar
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexGrow: 1,
+              justifyContent: "space-between",
+            }}
+          >
             <Typography
               variant="h4"
               component="div"
-              sx={{ flexGrow: 1 }}
+              sx={{ cursor: "pointer" }}
               onClick={() => navigate("/")}
             >
               Webshop

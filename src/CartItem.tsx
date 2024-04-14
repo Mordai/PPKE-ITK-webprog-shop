@@ -12,12 +12,12 @@ type CartItemProps = {
 export default function CartItem(props: CartItemProps) {
   return (
     <Stack
+      key={props.basketItem.product.id}
       display={"flex"}
       flexDirection={"column"}
       sx={{ pl: "20%", pr: "20%" }}
     >
       <Stack
-        key={props.basketItem.product.id}
         display={"flex"}
         alignContent={"center"}
         alignItems={"center"}

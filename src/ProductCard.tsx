@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { ProductData } from "./Types.ts";
+import { useNavigate } from "react-router-dom";
 
 type ProductCardProps = {
   product: ProductData;
@@ -14,10 +15,19 @@ type ProductCardProps = {
 };
 
 export default function ProductCard(props: ProductCardProps) {
+  const navigate = useNavigate();
   return (
     <Card sx={{ minWidth: 275, mb: 2 }}>
       <CardContent>
-        <Typography variant="h5" color="text.secondary" gutterBottom>
+        <Typography
+          variant="h5"
+          color="text.secondary"
+          onClick={() => {
+            navigate(`/product/${props.product.id}`, { replace: true });
+          }}
+          sx={{ cursor: "pointer" }}
+          gutterBottom
+        >
           {props.product.name}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">

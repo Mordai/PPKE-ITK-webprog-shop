@@ -5,6 +5,7 @@ import TOS from "./TOS.tsx";
 import { useState } from "react";
 import Basket from "./Basket.tsx";
 import { BasketItemData, ProductData } from "./Types.ts";
+import ProductPage from "./ProductPage.tsx";
 
 export default function App() {
   const [basketContent, setBasketContent] = useState<BasketItemData[]>([]);
@@ -48,18 +49,23 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={"/"} element={<MainLayout cartCount={totalQuantity} />}>
+        <Route path="/" element={<MainLayout cartCount={totalQuantity} />}>
           <Route index element={<Home addToBasket={addToBasket} />} />
           <Route
-            path={"basket"}
+            path="basket"
             element={
               <Basket
                 basketData={basketContent}
                 changeQuantity={changeQuantity}
+                clearBasket={() => setBasketContent([])}
               />
             }
           />
-          <Route path={"tos"} element={<TOS />} />
+          <Route
+            path="product/:id"
+            element={<ProductPage addToBasket={addToBasket} />}
+          />
+          <Route path="tos" element={<TOS />} />
         </Route>
       </Routes>
     </BrowserRouter>
