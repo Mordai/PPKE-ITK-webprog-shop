@@ -1,4 +1,4 @@
-import { BasketItemData, OrderStatus, apiURL } from "./Types.ts";
+import { BasketItemData, OrderStatus } from "./Types.ts";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import CartItem from "./CartItem.tsx";
 import { useEffect, useState } from "react";
