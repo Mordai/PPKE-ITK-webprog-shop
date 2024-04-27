@@ -25,7 +25,7 @@ export default function Basket(props: BasketProps) {
 
   const placeOrder = () => {
     axios
-      .post(apiURL + "createOrder", {
+      .post("https://beta.dev.itk.ppke.hu/webprog/lenba8/api.php", {
         basket: props.basketData.map((item) => ({
           id: item.product.id,
           q: item.quantity,
