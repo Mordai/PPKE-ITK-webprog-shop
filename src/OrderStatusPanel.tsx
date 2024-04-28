@@ -28,8 +28,16 @@ export default function OrderStatusPanel(props: { orderStatus: OrderStatus }) {
         {props.orderStatus.status === "Ordered" &&
           `A rendelés azonosítója: ${props.orderStatus.orderId}`}
         {props.orderStatus.status === "Error" &&
-          `Hibaüzenet: ${props.orderStatus.error}`}
+          `Hibaüzenet: ${props.orderStatus.error?.code}`}
       </Typography>
+
+      <Typography variant="body1" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
+        {props.orderStatus.error?.message.name}
+        {props.orderStatus.error?.message.email}
+        {props.orderStatus.error?.message.basket}
+        {props.orderStatus.error?.message.terms}
+      </Typography>
+     
     </Stack>
   );
 }

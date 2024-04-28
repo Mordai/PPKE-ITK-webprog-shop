@@ -16,7 +16,7 @@ export type BasketItemData = {
 export type OrderStatus = {
   status: "Ready" | "Ordered" | "Error";
   orderId?: string;
-  error?: string;
+  error?: {code: string, message: any};
 };
 
 export const apiURL = "https://beta.dev.itk.ppke.hu/webprog/example/api/";
