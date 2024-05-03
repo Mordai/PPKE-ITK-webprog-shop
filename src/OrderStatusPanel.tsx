@@ -1,9 +1,10 @@
-import { Stack, Typography } from "@mui/material";
+import { List, ListItem, Stack, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import { OrderStatus } from "./Types";
 
-export default function OrderStatusPanel(props: { orderStatus: OrderStatus }) {
+
+export default function OrderStatusPanel(props: {orderStatus : OrderStatus}) {
   return (
     <Stack
       display={"flex"}
@@ -26,17 +27,23 @@ export default function OrderStatusPanel(props: { orderStatus: OrderStatus }) {
       </Typography>
       <Typography variant="body1" sx={{ flexGrow: 1 }}>
         {props.orderStatus.status === "Ordered" &&
-          `A rendelés azonosítója: ${props.orderStatus.orderId}`}
+          `A rendelés azonosítója: ${props.orderStatus.id}`}
         {props.orderStatus.status === "Error" &&
-          `Hibaüzenet: ${props.orderStatus.error?.code}`}
+          `Hibaüzenet: ${props.orderStatus.message}`}
       </Typography>
-
-      <Typography variant="body1" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-        {props.orderStatus.error?.message.name}
-        {props.orderStatus.error?.message.email}
-        {props.orderStatus.error?.message.basket}
-        {props.orderStatus.error?.message.terms}
-      </Typography>
+      
+      {props.orderStatus.errors &&
+      <List sx={{ listStyleType: 'disc' }}>
+        {Object.entries(props.orderStatus.errors).map(([key, value]) => {
+          if(typeof key === "string")
+            {
+              return <ListItem>
+                <Typography variant="body1" sx={{ flexGrow: 1 }}>{value}</Typography>
+                </ListItem>
+            }
+        })}
+      </List>
+      }
      
     </Stack>
   );

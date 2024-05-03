@@ -40,26 +40,19 @@ export default function Basket(props: BasketProps) {
         })),
         terms: terms ? 'true' : 'false'
       })
-      .then((data) => {
-        if (data.status === 201) {
-          setOrderStatus({
-            status: "Ordered",
-            orderId: data.data.id,
-          });
-          props.clearBasket();
-        } else {
-          setOrderStatus({
-            status: "Error",
-            orderId: "",
-            error: {code: data.data.message, message: data.data.response.data},
-          });
-        }
+      .then((data) => {      
+        setOrderStatus({
+          status: "Ordered",
+          id: data.data.id,
+        });
+        props.clearBasket();
       })
       .catch((data) => {
+        console.log(data)
         setOrderStatus({
           status: "Error",
-          orderId: "",
-          error: {code: data.message, message: data.response.data},
+          message: data.response.data.message,
+          errors: data.response.data.errors && data.response.data.errors
         });
       });
   };

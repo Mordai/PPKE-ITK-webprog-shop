@@ -15,8 +15,14 @@ export type BasketItemData = {
 
 export type OrderStatus = {
   status: "Ready" | "Ordered" | "Error";
-  orderId?: string;
-  error?: {code: string, message: any};
+  id?: string;
+  message?: string;
+  errors? : {
+    name: boolean | string,
+    email: boolean | string,
+    terms: boolean | string,
+    basket: boolean | string,
+  }
 };
 
 export const apiURL = "https://beta.dev.itk.ppke.hu/webprog/example/api/";

@@ -47,7 +47,7 @@ export default function App() {
   );
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<MainLayout cartCount={totalQuantity} />}>
           <Route index element={<Home addToBasket={addToBasket} />} />
